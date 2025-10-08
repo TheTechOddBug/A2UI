@@ -451,15 +451,6 @@
                         ],
                         "default": "horizontal",
                         "description": "The orientation."
-                      },
-                      "color": {
-                        "type": "string",
-                        "description": "The color of the divider (e.g., hex code or semantic name)."
-                      },
-                      "thickness": {
-                        "type": "number",
-                        "default": 1,
-                        "description": "The thickness of the divider."
                       }
                     }
                   },
