@@ -21,7 +21,9 @@ def get_gallery_json() -> str:
             { "key": "date", "valueString": "2025-10-26" },
             { "key": "favorites", "valueMap": [
                  { "key": "0", "valueString": "A" }
-            ]}
+            ]},
+            { "key": "favoritesChips", "valueMap": [] },
+            { "key": "favoritesFilter", "valueMap": [] }
         ]
     }
 
@@ -79,7 +81,7 @@ def get_gallery_json() -> str:
         }
     })
 
-    # 5. MultipleChoice
+    # 5. MultipleChoice (Default)
     add_demo_surface("demo-multichoice", {
         "MultipleChoice": {
             "selections": { "path": "galleryData/favorites" },
@@ -91,10 +93,43 @@ def get_gallery_json() -> str:
         }
     })
 
+    # 5b. MultipleChoice (Chips)
+    add_demo_surface("demo-multichoice-chips", {
+        "MultipleChoice": {
+            "selections": { "path": "galleryData/favoritesChips" },
+            "description": "Select tags (Chips)",
+            "variant": "chips",
+            "options": [
+                { "label": { "literalString": "Work" }, "value": "work" },
+                { "label": { "literalString": "Home" }, "value": "home" },
+                { "label": { "literalString": "Urgent" }, "value": "urgent" },
+                { "label": { "literalString": "Later" }, "value": "later" }
+            ]
+        }
+    })
+
+    # 5c. MultipleChoice (Filterable)
+    add_demo_surface("demo-multichoice-filter", {
+        "MultipleChoice": {
+            "selections": { "path": "galleryData/favoritesFilter" },
+            "description": "Select countries (Filterable)",
+            "filterable": True,
+            "options": [
+                { "label": { "literalString": "United States" }, "value": "US" },
+                { "label": { "literalString": "Canada" }, "value": "CA" },
+                { "label": { "literalString": "United Kingdom" }, "value": "UK" },
+                { "label": { "literalString": "Australia" }, "value": "AU" },
+                { "label": { "literalString": "Germany" }, "value": "DE" },
+                { "label": { "literalString": "France" }, "value": "FR" },
+                { "label": { "literalString": "Japan" }, "value": "JP" }
+            ]
+        }
+    })
+
     # 6. Image
     add_demo_surface("demo-image", {
         "Image": {
-            "url": { "literalString": "https://picsum.photos/400/200" },
+            "url": { "literalString": "http://localhost:10005/assets/a2ui.png" },
             "usageHint": "mediumFeature"
         }
     })
@@ -238,6 +273,7 @@ def get_gallery_json() -> str:
     # 12. Video
     add_demo_surface("demo-video", {
         "Video": {
+            # Still external as user only provided audio and image
             "url": { "literalString": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" }
         }
     })
@@ -305,8 +341,8 @@ def get_gallery_json() -> str:
     # 15. AudioPlayer
     add_demo_surface("demo-audio", {
         "AudioPlayer": {
-            "url": { "literalString": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" },
-            "description": { "literalString": "Sample Audio" }
+            "url": { "literalString": "http://localhost:10005/assets/audio.mp3" },
+            "description": { "literalString": "Local Audio Sample" }
         }
     })
 
@@ -319,7 +355,7 @@ def get_gallery_json() -> str:
                 {
                         "id": "response-text",
                         "component": {
-                            "Text": { "text": { "literalString": "Interact with the gallery to see responses." } }
+                            "Text": { "text": { "literalString": "Interact with the gallery to see responses. This view is updated by the agent by relaying the raw action commands it received from the client" } }
                         }
                 }
             ]

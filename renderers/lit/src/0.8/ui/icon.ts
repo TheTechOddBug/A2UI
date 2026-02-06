@@ -39,11 +39,11 @@ export class Icon extends Root {
         display: block;
         flex: var(--weight);
         min-height: 0;
-        overflow: auto;
+
       }
 
       .g-icon {
-        font-family: 'Material Icons';
+        font-family: 'Material Symbols Outlined';
         font-weight: normal;
         font-style: normal;
         font-size: 24px;
