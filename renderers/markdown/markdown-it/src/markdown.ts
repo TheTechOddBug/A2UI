@@ -14,6 +14,17 @@
  limitations under the License.
  */
 
-export * from './processor';
-export * from './types';
-export { provideMarkdownRenderer } from './markdown';
+import { rawMarkdownRenderer } from './raw-markdown.js';
+import { sanitize } from './sanitizer.js';
+import * as Types from '@a2ui/web_core';
+
+/**
+ * A Markdown to HTML renderer using markdown-it and dompurify.
+ * @param value The markdown code to render.
+ * @param options Options for the markdown renderer.
+ * @returns The rendered HTML as a string.
+ */
+export function renderMarkdown(value: string, options?: Types.MarkdownRendererOptions): string {
+  const htmlString = rawMarkdownRenderer.render(value, options?.tagClassMap);
+  return sanitize(htmlString);
+}
